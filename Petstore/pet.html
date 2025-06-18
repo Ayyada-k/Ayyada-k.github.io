@@ -39,7 +39,18 @@
         <section class="featured">
 
             <h2>Featured Pets</h2>
-
+            <div>
+                Type:
+                <input type="checkbox" id="dog" name="pet-type" value="Dog" checked>
+                <label for="dog">Dog</label>
+                <input type="checkbox" id="cat" name="pet-type" value="Cat" checked >
+                <label for="cat">Cat</label>
+                
+                <input type="checkbox" id="bird" name="pet-type" value="Bird" checked>
+                <label for="bird">Bird</label>
+                <input type="checkbox" id="capybara" name="pet-type" value="Capybara" checked>
+                <label for="capybara">Capybara</label>
+            </div>
             <div class="pet-list" id="pet-list">
 
             </div>
@@ -61,6 +72,7 @@
 
 
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script> 
     <script src="script.js"></script>
     <script src="loadpets.js"></script>
 

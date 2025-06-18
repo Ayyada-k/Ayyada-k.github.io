@@ -22,51 +22,109 @@ const pets = [
 
 ]
 
-for(let i = 0; i < pets.length; i++) {
-    const pet = pets[i];
-    const petDiv = document.getElementById('pet-list').appendChild(document.createElement('div'));
-    petDiv.className = 'pet';
-    petDiv.innerHTML = `
+// for(let i = 0; i < pets.length; i++) {
+//     const pet = pets[i];
+//     const petDiv = document.getElementById('pet-list').appendChild(document.createElement('div'));
+//     petDiv.className = 'pet';
+//     petDiv.innerHTML = `
+//         <img src="${pet.img}" alt="${pet.name}">
+//         <h3>${pet.name}</h3>
+//         <p>Type: ${pet.type}</p>
+//         <p>Age: ${pet.age} years</p>
+//         <button onclick="adoptPet()">Adopt Now</button>
+//     `;
+//     document.getElementById('pet-list').appendChild(petDiv);
+// }
+// // function loadPets() { 
+
+// //     console.log('Loading pets...'); 
+  
+// //     const petList = document.getElementById('pet-list'); 
+  
+// //     pets.forEach(pet => { 
+  
+// //       const petItem = document.createElement('div'); 
+  
+// //       petItem.className = 'pet'; 
+  
+// //       petItem.innerHTML = ` 
+  
+// //         <img src="${pet.img}" alt="${pet.name}"> 
+  
+// //         <h3>${pet.name}</h3> 
+  
+// //         <p>Type: ${pet.type}</p> 
+  
+// //         <p>Age: ${pet.age} years</p> 
+  
+// //         <button onclick="adoptPet()">Adopt Now</button> 
+  
+// //     `; 
+  
+// //       petList.appendChild(petItem); 
+  
+// //     }); 
+  
+// //   } 
+  
+// //   document.addEventListener('DOMContentLoaded', loadPets); 
+  
+// console.log('Pets loaded successfully.'); 
+
+// function test1() {
+//     console.log("Text 1 executed")
+// }
+function loadPets() {
+    console.log("Loading pets...");
+    const petList = $("#pet-list");
+    pets.forEach((pet) => {
+      const petItem = $("<div>").addClass("pet").html(`
         <img src="${pet.img}" alt="${pet.name}">
         <h3>${pet.name}</h3>
         <p>Type: ${pet.type}</p>
         <p>Age: ${pet.age} years</p>
-        <button onclick="adoptPet()">Adopt Now</button>
-    `;
-    document.getElementById('pet-list').appendChild(petDiv);
-}
-// function loadPets() { 
-
-//     console.log('Loading pets...'); 
+        <button class="adopt-btn">Adopt Now</button>
+      `);
+      petList.append(petItem);
+    });
   
-//     const petList = document.getElementById('pet-list'); 
+    // Attach click handler using event delegation
+    petList.on("click", ".adopt-btn", adoptPet);
   
-//     pets.forEach(pet => { 
+    // install event handler for pet type
+    $('input[name="pet-type"]').on("change", function () {
+      const selectedType = $(this).val();
+      filterPets();
   
-//       const petItem = document.createElement('div'); 
+    });
+  }
   
-//       petItem.className = 'pet'; 
+  function filterPets() {
   
-//       petItem.innerHTML = ` 
+    console.log("Selected pet type:", $('input[name="pet-type"]:checked'));
+    const types = $('input[name="pet-type"]:checked')
+      .map(function () {
+        return $(this).val();
+      })
+      .get();
   
-//         <img src="${pet.img}" alt="${pet.name}"> 
+    console.log(types);
   
-//         <h3>${pet.name}</h3> 
+    const filteredPets = pets.filter((pet) => types.includes(pet.type));
+    console.log(filteredPets);
   
-//         <p>Type: ${pet.type}</p> 
+    const petList = $("#pet-list");
+    petList.empty(); // Clear the existing pets
+    filteredPets.forEach((pet) => {
+      const petItem = $("<div>").addClass("pet").html(`
+        <img src="${pet.img}" alt="${pet.name}">
+        <h3>${pet.name}</h3>
+        <p>Type: ${pet.type}</p>
+        <p>Age: ${pet.age} years</p>
+        <button class="adopt-btn">Adopt Now</button>
+      `);
+      petList.append(petItem);
+    });
+  }
   
-//         <p>Age: ${pet.age} years</p> 
-  
-//         <button onclick="adoptPet()">Adopt Now</button> 
-  
-//     `; 
-  
-//       petList.appendChild(petItem); 
-  
-//     }); 
-  
-//   } 
-  
-//   document.addEventListener('DOMContentLoaded', loadPets); 
-  
-console.log('Pets loaded successfully.'); 
+  $(document).ready(loadPets);
