@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sample Quotation</title>
+  <meta name="description" content="Company quotation" />
+  <meta name="author" content="SitePoint" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous"
+  />
+  <style>
+    .deleteRow {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .deleteRow:hover {
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <b>
+    Your company name here
+    <span style="float:right; font-size:30px;">QUOTATION</span>
+  </b>
+
+  <p>
+    Your company address line1 here
+    <br />Your company address line2 here
+    <span style="float:right;">
+      <img src="img/quote-pic.jpg" style="width:100px;height:100px;" />
+    </span>
+    <br />Your company address line3 here
+  </p>
+  <br />
+  <p>Your ZIP code here</p>
+  <p id="bottom-line">
+    Phone: 12345678
+    <span class="tab">Mobile: 12345678</span>
+    <span style="float: right;"><span id="currentDate">2025/06/25</span></span>
+  </p>
+
+  <p class="thick text-center">
+    Currency Dollar
+    <span class="tab">No.:A000000</span>
+    <span style="float:left;">Page No. 2</span>
+  </p>
+
+  <p class="text-center">
+    Ship to:
+    <span class="tab">Sample customer name 001</span>
+    <span style="float:left;">To: <span class="tab">Sample customer name 001</span></span>
+  </p>
+
+  <p class="text-center">
+    Ship to address line1
+    <span style="float:left;">  Sample address line1</span>
+    <br />Ship to address line2
+    <span style="float:left;">  Sample address line2</span>
+    <br />Ship to address line3
+    <span style="float:left;">  Sample address line3</span>
+  </p>
+
+  <table class="center table table-bordered">
+    <thead>
+      <tr>
+        <th>Salesperson</th>
+        <th>Your P.O. No.</th>
+        <th>Date Shipped</th>
+        <th>Shipped Via</th>
+        <th>F.O.B Point</th>
+        <th>Terms</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="bottom-line">
+        <td>Administrator</td>
+        <td>Sample PO#</td>
+        <td>2011/3/18</td>
+        <td>Courier Services</td>
+        <td>U.S.A</td>
+        <td>2 Weeks</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#exampleModal">
+    Add Product
+  </button>
+
+  <table class="center table table-bordered">
+    <thead>
+      <tr>
+        <th>Quantity</th>
+        <th>Description</th>
+        <th>Unit Price</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody id="dataTable"></tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-right">Subtotal</td>
+        <td id="subTotal">0.00</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-right">Sales Tax (10%)</td>
+        <td id="salesTax">0.00</td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-right">Total Due</td>
+        <td id="totalDue">0.00</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <p class="text-center">
+    <b>Make all checks payable to:</b>
+    <br /><i>Your company name here</i>
+    <br /><b>If you have any question concerning this invoice, call:</b>
+    <br /><b>THANK YOU FOR YOUR BUSINESS</b>
+  </p>
+
+  <footer>WHO ARE YOU?</footer>
+
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="productForm">
+            <div class="form-group">
+              <label for="productSelect">Product</label>
+              <select id="productSelect" class="form-control" required>
+                <option value="">Select a product</option>
+                <option value="Mouse" data-price="25">Mouse - $25</option>
+                <option value="Keyboard" data-price="45">Keyboard - $45</option>
+                <option value="Monitor" data-price="150">Monitor - $150</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quantityInput">Quantity</label>
+              <input type="number" class="form-control" id="quantityInput" value="1" min="1" required />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="saveProduct">Add Product</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      const VAT_RATE = 0.10;
+
+      function calculateTotals() {
+        let subtotal = 0;
+        $("#dataTable tr").each(function () {
+          const amount = parseFloat($(this).find(".item-amount").text()) || 0;
+          subtotal += amount;
+        });
+        const vat = subtotal * VAT_RATE;
+        const total = subtotal + vat;
+        $("#subTotal").text(subtotal.toFixed(2));
+        $("#salesTax").text(vat.toFixed(2));
+        $("#totalDue").text(total.toFixed(2));
+      }
+
+      $("#saveProduct").on("click", function () {
+        const selected = $("#productSelect option:selected");
+        const product = selected.val();
+        const price = parseFloat(selected.data("price"));
+        const qty = parseInt($("#quantityInput").val());
+
+        if (!product || isNaN(price) || isNaN(qty)) return;
+
+        const amount = price * qty;
+        const newRow = `
+          <tr>
+            <td>${qty}</td>
+            <td>
+              ${product}
+              <button class="deleteRow ml-2" title="Delete">🗑️</button>
+            </td>
+            <td>$${price.toFixed(2)}</td>
+            <td class="item-amount">${amount.toFixed(2)}</td>
+          </tr>
+        `;
+        $("#dataTable").append(newRow);
+        $("#exampleModal").modal("hide");
+        $("#productForm")[0].reset();
+        calculateTotals();
+      });
+
+      $("#dataTable").on("click", ".deleteRow", function () {
+        $(this).closest("tr").remove();
+        calculateTotals();
+      });
+
+      calculateTotals();
+    });
+  </script>
+</body>
+</html>
