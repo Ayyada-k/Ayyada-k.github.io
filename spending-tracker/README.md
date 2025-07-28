@@ -20,11 +20,11 @@ A responsive web application for tracking personal expenses and managing spendin
 ## 📸 Screenshots
 
 ### Dashboard Page
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](.dashboard.png)
 
 
 ### Spending Tracker Page
-![Spending Tracker](./screenshots/spending-tracker.png)
+![Spending Tracker](.journal.png)
 
 
 ## 🎯 Usage
