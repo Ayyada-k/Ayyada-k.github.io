@@ -3,6 +3,7 @@ import DataTable from './components/DataTable'
 import { useLocalStorage } from 'react-use'
 import categories from './data/category.json'
 import { useMemo } from 'react'
+import './SpendingTracker.css'
 
 // Helper functions
 function addSpendingRecord(records, newRecord) {
@@ -48,34 +49,67 @@ function SpendingTracker() {
   const totalSpending = calculateTotalSpending(spendingRecords)
 
   return (
-    <>
-      <h2>Spending Tracker</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label>
-          Category:
-          <select {...register("category", { required: true })} defaultValue={allCategories[0]?.id}>
-            {allCategories.map(cat => (
-              <option key={cat.id} value={cat.id}>{cat.icon} {cat.name}</option>
-            ))}
-          </select>
-        </label>
-        <br />
-        <label>
-          Date:
-          <input type="date" {...register("date", { required: true })} />
-        </label>
-        <br />
-        <label>
-          Amount:
-          <input type="number" step="1" {...register("amount", { required: true, min: 0 })} />
-        </label>
-        <br />
-        <button type="submit">Add Spending</button>
-      </form>
-      <hr />
-      <DataTable data={spendingRecords || []} onDelete={handleDelete} />
-      <h3>Total Spending: {totalSpending} ฿</h3>
-    </>
+    <div className="spending-tracker">
+      <h2>💳 Spending Tracker</h2>
+      
+      <div className="form-container">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-grid">
+            <div className="form-group">
+              <label className="form-label">Category</label>
+              <select 
+                className="form-select"
+                {...register("category", { required: true })} 
+                defaultValue={allCategories[0]?.id}
+              >
+                {allCategories.map(cat => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.icon} {cat.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            <div className="form-group">
+              <label className="form-label">Date</label>
+              <input 
+                type="date" 
+                className="form-input"
+                placeholder="Select a date"
+                title="Click to open calendar picker"
+                {...register("date", { required: true })} 
+              />
+            </div>
+            
+            <div className="form-group">
+              <label className="form-label">Amount (฿)</label>
+              <input 
+                type="number" 
+                step="1" 
+                className="form-input"
+                placeholder="Enter amount"
+                {...register("amount", { required: true, min: 0 })} 
+              />
+            </div>
+          </div>
+          
+          <button type="submit" className="submit-button">
+            Add Spending Record
+          </button>
+        </form>
+      </div>
+
+      <hr className="divider" />
+      
+      <div className="data-section">
+        <h3 className="section-title">📊 Spending Records</h3>
+        <DataTable data={spendingRecords || []} onDelete={handleDelete} />
+        
+        <div className="total-spending">
+          <h3>Total Spending: {totalSpending.toLocaleString()} ฿</h3>
+        </div>
+      </div>
+    </div>
   )
 }
 

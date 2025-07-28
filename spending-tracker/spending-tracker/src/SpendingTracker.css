@@ -1,0 +1,254 @@
+.spending-tracker {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.spending-tracker h2 {
+  color: #9c27b0;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(156, 39, 176, 0.1);
+}
+
+.form-container {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(156, 39, 176, 0.1);
+  margin-bottom: 30px;
+  border: 1px solid rgba(156, 39, 176, 0.1);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-select,
+.form-input {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: white;
+  color: #000000 !important; /* Force black text */
+}
+
+.form-select option {
+  color: #000000 !important; /* Force black text in options */
+  background-color: white;
+}
+
+/* Enhanced date input styling */
+.form-input[type="date"] {
+  position: relative;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%239c27b0'%3E%3Cpath d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  padding-right: 45px;
+}
+
+/* Style the calendar icon for webkit browsers */
+.form-input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  color: #9c27b0;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 12px;
+  opacity: 0; /* Hide default icon */
+}
+
+/* Style for Firefox */
+.form-input[type="date"]::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.form-select:focus,
+.form-input:focus {
+  outline: none;
+  border-color: #9c27b0;
+  box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.1);
+  color: #000000 !important; /* Ensure text stays black on focus */
+}
+
+/* Enhanced focus state for date input */
+.form-input[type="date"]:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='%23e91e63'%3E%3Cpath d='M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z'/%3E%3C/svg%3E");
+}
+
+.form-select {
+  cursor: pointer;
+}
+
+.submit-button {
+  background: linear-gradient(45deg, #9c27b0 30%, #e91e63 90%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(156, 39, 176, 0.3);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.data-section {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(156, 39, 176, 0.1);
+  margin-bottom: 20px;
+  border: 1px solid rgba(156, 39, 176, 0.1);
+}
+
+.section-title {
+  color: #9c27b0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.total-spending {
+  background: linear-gradient(135deg, #9c27b0 0%, #e91e63 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+}
+
+.total-spending h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(45deg, #9c27b0 30%, #e91e63 90%);
+  margin: 30px 0;
+  border-radius: 1px;
+}
+
+/* Loading and empty states */
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .spending-tracker {
+    padding: 15px;
+  }
+  
+  .spending-tracker h2 {
+    font-size: 2rem;
+  }
+  
+  .form-container,
+  .data-section {
+    padding: 20px;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .submit-button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .spending-tracker {
+    padding: 10px;
+  }
+  
+  .spending-tracker h2 {
+    font-size: 1.8rem;
+  }
+  
+  .form-container,
+  .data-section {
+    padding: 15px;
+  }
+  
+  .total-spending h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Form validation styles */
+.form-select:invalid,
+.form-input:invalid {
+  border-color: #f44336;
+}
+
+.form-select:valid,
+.form-input:valid {
+  border-color: #4caf50;
+}
+
+/* Animation for form submission */
+@keyframes submitSuccess {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.submit-button.success {
+  animation: submitSuccess 0.3s ease;
+}

@@ -15,3 +15,18 @@
   padding: 24px;
   background: #fff;
 }
+
+.purple-tracker-button {
+  background-color: #9c27b0 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  margin-top: 16px !important;
+}
+
+.purple-tracker-button:hover {
+  background-color: #7b1fa2 !important;
+}
+
+.purple-text {
+  color: #9c27b0 !important;
+}

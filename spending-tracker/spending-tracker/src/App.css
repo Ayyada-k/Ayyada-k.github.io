@@ -1,7 +1,8 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -43,10 +44,27 @@
 
 .app-root {
   min-height: 100vh;
-  width: flex;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: '';
   box-sizing: border-box;
+}
+
+.gradient-appbar {
+  background: linear-gradient(45deg, #de46f9 30%, #f86093 90%) !important;
+  box-shadow: 0 3px 5px 2px rgba(156, 39, 176, .3) !important;
+}
+
+.purple-button {
+  background-color: #9c27b0 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  margin-left: 8px !important;
+}
+
+.purple-button:hover {
+  background-color: #7b1fa2 !important;
 }

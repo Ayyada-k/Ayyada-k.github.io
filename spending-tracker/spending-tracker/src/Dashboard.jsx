@@ -114,7 +114,7 @@ function Dashboard() {
   return (
     <div className="home-root">
       <Typography variant="h3" gutterBottom>
-        V-Shop Dashboard
+        Dashboard
       </Typography>
 
       <Card className="home-card" sx={{ minWidth: 300, maxWidth: 600, mb: 3 }}>
@@ -127,10 +127,9 @@ function Dashboard() {
           </Typography>
           <Button
             variant="contained"
-            color="primary"
             component={Link}
             to="/tracker"
-            sx={{ mt: 2 }}
+            className="purple-tracker-button"
             fullWidth
           >
             Go to Spending Tracker
@@ -181,7 +180,7 @@ function Dashboard() {
         <Card sx={{ minWidth: 200, background: '#e8f5e8', textAlign: 'center' }}>
           <CardContent>
             <Typography variant="h6">Total Spending</Typography>
-            <Typography variant="h4" color="primary">
+            <Typography variant="h4" className="purple-text">
               THB {totalSpending.toLocaleString()}
             </Typography>
           </CardContent>
@@ -191,13 +190,13 @@ function Dashboard() {
       {/* Charts */}
       <Stack direction={{ xs: 'column', md: 'row' }} spacing={3}>
         {/* Line Chart */}
-        <Card sx={{ flex: 1, minWidth: 300, maxWidth: 600 }}>
+        <Card sx={{ flex: 1, minWidth: 400, maxWidth: 800 }}>
           <CardContent>
             <Typography variant="h6" gutterBottom>
               Spending Over Time
             </Typography>
             {groupedData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={250}>
+              <ResponsiveContainer width="100%" height={400}>
                 <LineChart data={groupedData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
@@ -215,13 +214,13 @@ function Dashboard() {
         </Card>
 
         {/* Pie Chart */}
-        <Card sx={{ flex: 1, minWidth: 300, maxWidth: 400 }}>
+        <Card sx={{ flex: 1, minWidth: 400, maxWidth: 600 }}>
           <CardContent>
             <Typography variant="h6" gutterBottom>
               Spending by Category
             </Typography>
             {pieChartData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={250}>
+              <ResponsiveContainer width="100%" height={400}>
                 <PieChart>
                   <Pie
                     data={pieChartData}
@@ -229,7 +228,7 @@ function Dashboard() {
                     nameKey="name"
                     cx="50%"
                     cy="50%"
-                    outerRadius={80}
+                    outerRadius={120}
                     label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                     labelLine={false}
                   >

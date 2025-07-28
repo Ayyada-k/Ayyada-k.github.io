@@ -10,16 +10,16 @@ import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppBar position="static">
+    <BrowserRouter basename="/spending-tracker">
+      <AppBar position="static" className="gradient-appbar">
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ marginRight: 'auto' }}>
             Spending Tracker
           </Typography>
-          <Button color="inherit" component={Link} to="/">
+          <Button color="inherit" component={Link} to="/" className="purple-button">
             Dashboard
           </Button>
-          <Button color="inherit" component={Link} to="/tracker">
+          <Button color="inherit" component={Link} to="/tracker" className="purple-button">
             Spending Tracker
           </Button>
         </Toolbar>
@@ -27,9 +27,9 @@ function App() {
       
 
       <div className="app-root">
-        <Dashboard />
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tracker" element={<SpendingTracker />} />
         </Routes>
       </div>

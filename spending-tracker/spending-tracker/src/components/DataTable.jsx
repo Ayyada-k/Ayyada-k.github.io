@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import categories from '../data/category.json';
+import './DataTable.css';
 
 // components/DataTable.jsx
 export default function DataTable({ data, onDelete }) {
@@ -8,28 +9,46 @@ export default function DataTable({ data, onDelete }) {
     return category ? `${category.icon} ${category.name}` : categoryId;
   };
 
+  if (!data || data.length === 0) {
+    return (
+      <div className="table-container">
+        <div className="empty-state">
+          No spending records found. Add some expenses to see them here!
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <table border="1" cellPadding="5">
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Date</th>
-          <th>Amount (฿)</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(record => (
-          <tr key={record.id}>
-            <td>{getCategoryDisplay(record.category)}</td>
-            <td>{record.date}</td>
-            <td>{record.amount}</td>
-            <td>
-              <button onClick={() => onDelete(record.id)}>Delete</button>
-            </td>
+    <div className="table-container">
+      <table className="data-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Amount (฿)</th>
+            <th>Actions</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map(record => (
+            <tr key={record.id}>
+              <td className="category-cell">{getCategoryDisplay(record.category)}</td>
+              <td className="date-cell">{record.date}</td>
+              <td className="amount-cell">{record.amount.toLocaleString()}</td>
+              <td className="actions-cell">
+                <button 
+                  className="delete-button"
+                  onClick={() => onDelete(record.id)}
+                  aria-label={`Delete expense for ${getCategoryDisplay(record.category)}`}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
