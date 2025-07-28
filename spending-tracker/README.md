@@ -1,5 +1,5 @@
 # Team Member
-Thapana Dermbangchon 
+Thapana Dermbangchon  
 Ayyada Kriangkaisak 
 
 # 💰 Spending Tracker
